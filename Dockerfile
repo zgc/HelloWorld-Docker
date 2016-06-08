@@ -16,6 +16,11 @@ RUN \
     dpkg-reconfigure locales && \
     echo "Asia/Shanghai" > /etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
+    
+ENV SOURCES_DOMAIN mirrors.aliyun.com
+
+RUN \
+    sed -i "s/archive.ubuntu.com/$SOURCES_DOMAIN/g" /etc/apt/sources.list
 
 # oracle jdk
 ENV JAVA_VER 8
