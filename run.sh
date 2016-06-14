@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if -f $CATALINA_HOME/webapps/ROOT.war; then
-	rm -rf $CODE
-elif -f $CODE/pom.xml; then
+if ! -f $CATALINA_HOME/webapps/ROOT.war && -f $CODE/pom.xml; then
 	cd $CODE
 	mvn install
 	rm -rf $CATALINA_HOME/webapps/* 
@@ -13,5 +11,7 @@ elif -f $CODE/pom.xml; then
 		rm -rf $DELETE_M2;
 	fi
 fi
+
+rm -rf $CODE
 
 exec catalina.sh run
