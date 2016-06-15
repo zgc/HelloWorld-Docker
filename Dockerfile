@@ -104,7 +104,7 @@ RUN set -e \
 # maven
 ENV MAVEN_HOME /usr/local/maven
 ENV PATH MAVEN_HOME/bin:$PATH
-VOLUME /root/.m2
+# VOLUME /root/.m2
 ENV CLEAN_M2 true
 RUN mkdir -p "$MAVEN_HOME"
 WORKDIR $MAVEN_HOME
@@ -128,7 +128,7 @@ RUN set -ex \
 # code
 ENV CODE /code
 # RUN mkdir -p "$CODE"
-VOLUME $CODE
+# VOLUME $CODE
 
 WORKDIR $CATALINA_HOME
 
