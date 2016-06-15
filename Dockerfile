@@ -105,7 +105,7 @@ RUN set -e \
 ENV MAVEN_HOME /usr/local/maven
 ENV PATH MAVEN_HOME/bin:$PATH
 VOLUME /root/.m2
-ENV DELETE_M2 true
+ENV CLEAN_M2 true
 RUN mkdir -p "$MAVEN_HOME"
 WORKDIR $MAVEN_HOME
 
