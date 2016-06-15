@@ -128,7 +128,7 @@ RUN set -ex \
 	&& ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
 
 # code
-ENV CODE /code
+ENV CODE /root/code
 RUN mkdir -p "$CODE"
 VOLUME $CODE
 ENV CLEAN_CODE false
