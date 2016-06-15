@@ -139,6 +139,7 @@ RUN apt purge -y --auto-remove curl \
 	&& apt autoclean && apt --purge -y autoremove \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ENV FORCED_COMPILATION false
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 
