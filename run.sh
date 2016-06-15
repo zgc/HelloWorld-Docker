@@ -6,6 +6,7 @@ if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ ! $FORCED_COMPILATION = "false"
 		elif
 			echo "Forced compilation = $FORCED_COMPILATION"
 		fi
+
 		if [ -f $CODE/pom.xml ]; then
 			cd $CODE
 			mvn install
