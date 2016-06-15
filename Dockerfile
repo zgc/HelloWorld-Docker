@@ -16,7 +16,7 @@ RUN \
 	dpkg-reconfigure locales \
 	&& echo "Asia/Shanghai" > /etc/timezone \
 	&& dpkg-reconfigure -f noninteractive tzdata
-	
+
 ENV SOURCES_DOMAIN mirrors.aliyun.com
 
 RUN \
@@ -58,7 +58,7 @@ RUN set -ex \
 	\
 	&& curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
 	&& curl -fSL "$TOMCAT_TGZ_URL.sha1" -o tomcat.tar.gz.sha1 \
-	&& sha1sum tomcat.tar.gz > tomcat.tar.gz.sha1 \
+	&& sed -i "s/apache-tomcat-$TOMCAT_VERSION.tar.gz/tomcat.tar.gz/g" tomcat.tar.gz.sha1 \
 	&& tomcat_sum="$(sha1sum -c tomcat.tar.gz.sha1)" \
 	&& if ! echo "$tomcat_sum" | grep 'ok' ; then \
         	echo "$tomcat_sum"; \
@@ -124,7 +124,7 @@ RUN set -ex \
 	\
 	&& curl -fSL "$MAVEN_TGZ_URL" -o maven.tar.gz \
 	&& curl -fSL "$MAVEN_TGZ_URL.sha1" -o maven.tar.gz.sha1 \
-	&& sha1sum maven.tar.gz > maven.tar.gz.sha1 \
+	&& echo " maven.tar.gz" >> maven.tar.gz.sha1 \
 	&& maven_sum="$(sha1sum -c maven.tar.gz.sha1)" \
 	&& if ! echo "$maven_sum" | grep 'ok' ; then \
         	echo "$maven_sum"; \
