@@ -59,7 +59,11 @@ RUN set -ex \
 	&& curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
 	&& curl -fSL "$TOMCAT_TGZ_URL.sha1" -o tomcat.tar.gz.sha1 \
 	&& sha1sum tomcat.tar.gz > tomcat.tar.gz.sha1 \
-	&& sha1sum -c tomcat.tar.gz.sha1 \
+	&& tomcat_sum="$(sha1sum -c tomcat.tar.gz.sha1)" \
+	&& if ! echo "$tomcat_sum" | grep 'ok' ; then \
+        	echo "$tomcat_sum"; \
+        	exit 1; \
+	fi \
 	&& tar -xvf tomcat.tar.gz --strip-components=1 \
 	&& rm bin/*.bat \
 	&& rm tomcat.tar.gz* \
@@ -85,7 +89,7 @@ RUN set -ex \
 				--with-ssl=yes \
 			&& make -j$(nproc) \
 			&& make install \
-		) \
+	) \
 	&& apt purge -y --auto-remove $nativeBuildDeps \
 	&& rm -rf "$nativeBuildDir" \
 	&& rm bin/tomcat-native.tar.gz \
@@ -99,7 +103,7 @@ RUN set -e \
 	&& if ! echo "$nativeLines" | grep 'INFO: Loaded APR based Apache Tomcat Native library' >&2; then \
 			echo >&2 "$nativeLines"; \
 			exit 1; \
-		fi
+	fi
 
 # maven
 ENV MAVEN_HOME /usr/local/maven
@@ -121,7 +125,11 @@ RUN set -ex \
 	&& curl -fSL "$MAVEN_TGZ_URL" -o maven.tar.gz \
 	&& curl -fSL "$MAVEN_TGZ_URL.sha1" -o maven.tar.gz.sha1 \
 	&& sha1sum maven.tar.gz > maven.tar.gz.sha1 \
-	&& sha1sum -c maven.tar.gz.sha1 \
+	&& maven_sum="$(sha1sum -c maven.tar.gz.sha1)" \
+	&& if ! echo "$maven_sum" | grep 'ok' ; then \
+        	echo "$maven_sum"; \
+        	exit 1; \
+	fi \
 	&& tar -xvf maven.tar.gz --strip-components=1 \
 	&& rm bin/*.cmd \
 	&& rm maven.tar.gz* \
