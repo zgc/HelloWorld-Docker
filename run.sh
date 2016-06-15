@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ -f $CODE/pom.xml ]; then
+if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] && [ -f $CODE/pom.xml ]; then
 	cd $CODE
 	mvn install
 	rm -rf $CATALINA_HOME/webapps/* 
