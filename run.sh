@@ -3,7 +3,7 @@
 if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ ! $FORCED_COMPILATION = "false" ] || [ $FORCED_COMPILATION = "true" ]; then
 		if [ ! -f $CATALINA_HOME/webapps/ROOT.war ]; then
 			echo "'ROOT.war' does not exist!"
-		elif
+		else
 			echo "Forced compilation = $FORCED_COMPILATION"
 		fi
 
@@ -14,10 +14,10 @@ if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ ! $FORCED_COMPILATION = "false"
 			cp target/*.war $CATALINA_HOME/webapps/ROOT.war
 			rm -rf /usr/bin/mvn
 			rm -rf $MAVEN_HOME
-		elif
+		else
 			echo "'$CODE/pom.xml' does not exist!"
 		fi
-elif
+else
 	echo "'$CATALINA_HOME/webapps/' in the presence of ROOT.war, give priority to the use of ROOT.war"
 fi
 
