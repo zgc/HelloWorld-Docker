@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ ! $FORCED_COMPILATION = "false" ] || [ $FORCED_COMPILATION = "true" ] || [ $FORCED_COMPILATION = "yes" ] || [ ! $FORCED_COMPILATION = "no" ]; then
+if [ ! -f $CATALINA_HOME/webapps/ROOT.war ] || [ ! $FORCED_COMPILATION = "false" ] || [ $FORCED_COMPILATION = "true" ]; then
 		if [ ! -f $CATALINA_HOME/webapps/ROOT.war ]; then
 			echo "'ROOT.war' does not exist!"
 		elif
@@ -22,13 +22,13 @@ fi
 
 echo "Clean code = $CLEAN_CODE"
 
-if [ ! $CLEAN_CODE = "false" ] || [ $CLEAN_CODE = "true" ] || [ $CLEAN_CODE = "yes" ] || [ ! $CLEAN_CODE = "no" ]; then
+if [ ! $CLEAN_CODE = "false" ] || [ $CLEAN_CODE = "true" ]; then
 	rm -rf $CODE
 fi
 
 echo "Clean .m2 = $CLEAN_M2"
 
-if [ ! $CLEAN_M2 = "false" ] || [ $CLEAN_M2 = "true" ] || [ $CLEAN_M2 = "yes" ] || [ ! $CLEAN_M2 = "no" ]; then
+if [ ! $CLEAN_M2 = "false" ] || [ $CLEAN_M2 = "true" ]; then
 	rm -rf $MAVEN_M2
 fi
 
